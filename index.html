@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The best gym in the city - Transform your body and mind">
+    <title>Fitness Zone</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+            color: white;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            height: 50px;
+            width: auto;
+        }
+
+        .header-right {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .payment, .signup {
+            background: linear-gradient(135deg, #ff4500, #ff6b35);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .payment:hover, .signup:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 69, 0, 0.4);
+        }
+
+        .payment a, .signup a {
+            color: white;
+            text-decoration: none;
+        }
+
+        nav {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 1rem 2rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        nav li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav li a:hover {
+            color: #ff4500;
+        }
+
+        nav li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ff4500;
+            transition: width 0.3s ease;
+        }
+
+        nav li a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(255, 69, 0, 0.3)),
+                        url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin-top: 120px;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            padding: 0 2rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff, #ff4500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content p {
+            font-size: 1.4rem;
+            margin-bottom: 2rem;
+            color: #cccccc;
+            font-weight: 300;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #ff4500, #ff6b35);
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 25px rgba(255, 69, 0, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 69, 0, 0.5);
+        }
+
+        .cta-button a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Classes Section */
+        .classes-section {
+            padding: 6rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .classes-section h2 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .classes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .class-card {
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid #333;
+            position: relative;
+            overflow: hidden;
+            background-image: url('https://images.unsplash.com/photo-1571019613914-85f342c6a11e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .class-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
+            z-index: 1;
+        }
+
+        .class-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 69, 0, 0.1), transparent);
+            transition: left 0.5s ease;
+            z-index: 2;
+        }
+
+        .class-card:hover::after {
+            left: 100%;
+        }
+
+        .class-card > * {
+            position: relative;
+            z-index: 3;
+        }
+
+        .class-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 69, 0, 0.2);
+            border-color: #ff4500;
+        }
+
+        .class-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #ff4500;
+            font-weight: 600;
+        }
+
+        .class-card p {
+            color: #cccccc;
+            margin-bottom: 1.5rem;
+        }
+
+        .class-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ff4500, #ff6b35);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+        }
+
+        /* Why Choose Us Section */
+        .why-choose-section {
+            background: linear-gradient(135deg, #111111, #1a1a1a);
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .why-choose-section h2 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            color: white;
+            font-weight: 700;
+        }
+
+        .why-choose-section p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            color: #cccccc;
+            line-height: 1.8;
+        }
+
+        .explore-btn {
+            background: linear-gradient(135deg, #ff4500, #ff6b35);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .explore-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 69, 0, 0.4);
+        }
+
+        .explore-btn a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Coaches Section */
+        .coaches-section {
+            padding: 6rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .coaches-section h2 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .coaches-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .coach-card {
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid #333;
+        }
+
+        .coach-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 69, 0, 0.2);
+            border-color: #ff4500;
+        }
+
+        .coach-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff4500, #ff6b35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    font-size: 2rem;
+    font-weight: bold;
+    overflow: hidden;
+    border: 3px solid #ff4500;
+    box-shadow: 0 4px 15px rgba(255, 69, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.coach-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+.coach-avatar:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(255, 69, 0, 0.5);
+}
+
+.coach-avatar:hover img {
+    transform: scale(1.1);
+}
+
+/* Fallback styling for when image fails to load */
+.coach-avatar img[src=""],
+.coach-avatar img:not([src]) {
+    display: none;
+}
+
+.coach-avatar:has(img[src=""]):before,
+.coach-avatar:has(img:not([src])):before {
+    content: "👤";
+    font-size: 2rem;
+    color: white;
+}
+
+        .coach-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+
+        .coach-card p {
+            color: #ff4500;
+            font-weight: 500;
+        }
+
+        /* Benefits Section */
+        .benefits-section {
+            background: linear-gradient(135deg, #111111, #1a1a1a);
+            padding: 6rem 2rem;
+        }
+
+        .benefits-section h2 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .benefits-section > p {
+            text-align: center;
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            color: #cccccc;
+            line-height: 1.8;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .benefit-card {
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid #333;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 69, 0, 0.2);
+            border-color: #ff4500;
+        }
+
+        .benefit-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #ff4500, #ff6b35);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
+        }
+
+        .benefit-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: white;
+            font-weight: 600;
+        }
+
+        .benefit-card p {
+            color: #cccccc;
+            line-height: 1.6;
+        }
+
+        /* BMI Calculator Styles */
+        .bmi-section {
+            background: linear-gradient(135deg, #111111, #1a1a1a);
+            padding: 6rem 2rem;
+        }
+
+        .bmi-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .bmi-info {
+            text-align: left;
+        }
+
+        .bmi-info h2 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            color: white;
+            font-weight: 700;
+        }
+
+        .bmi-info p {
+            font-size: 1.2rem;
+            color: #cccccc;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .bmi-calculator {
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid #333;
+        }
+
+        .bmi-calculator h3 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #ff4500;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .bmi-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .bmi-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .bmi-input-group label {
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .bmi-input-group input {
+            background: #333;
+            border: 1px solid #555;
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .bmi-input-group input:focus {
+            outline: none;
+            border-color: #ff4500;
+            box-shadow: 0 0 10px rgba(255, 69, 0, 0.3);
+        }
+
+        .bmi-calculate-btn {
+            background: linear-gradient(135deg, #ff4500, #ff6b35);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 1.1rem;
+        }
+
+        .bmi-calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 69, 0, 0.4);
+        }
+
+        .bmi-result {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: #333;
+            border-radius: 15px;
+            border: 1px solid #555;
+            text-align: center;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .bmi-value {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #ff4500;
+            margin-bottom: 0.5rem;
+        }
+
+        .bmi-category {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .bmi-description {
+            color: #cccccc;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .bmi-chart {
+            margin-top: 2rem;
+            background: #333;
+            border-radius: 15px;
+            padding: 1.5rem;
+            border: 1px solid #555;
+        }
+
+        .bmi-chart h4 {
+            color: #ff4500;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .bmi-ranges {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .bmi-range {
+            display: flex;
+            justify-content: space-between;
+            color: #cccccc;
+            padding: 0.5rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .bmi-range:hover {
+            background: #444;
+        }
+
+        .bmi-range.active {
+            background: rgba(255, 69, 0, 0.2);
+            color: #ff4500;
+            font-weight: 600;
+        }
+
+        .fitness-images {
+            margin-top: 3rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .fitness-image {
+            border-radius: 15px;
+            overflow: hidden;
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.3s ease;
+        }
+
+        .fitness-image:hover {
+            transform: scale(1.05);
+        }
+
+        .fitness-image:nth-child(1) {
+            background-image: url('https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');
+        }
+
+        .fitness-image:nth-child(2) {
+            background-image: url('https://images.unsplash.com/photo-1571019613914-85f342c6a11e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');
+        }
+
+        @media (max-width: 768px) {
+            .bmi-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .bmi-info h2 {
+                font-size: 2rem;
+            }
+        }
+        .contact-section {
+            padding: 6rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .contact-info {
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid #333;
+        }
+
+        .contact-info h3 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: white;
+            font-weight: 700;
+        }
+
+        .contact-info p {
+            color: #cccccc;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .register-btn {
+            background: linear-gradient(135deg, #ff4500, #ff6b35);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 2rem;
+        }
+
+        .register-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 69, 0, 0.4);
+        }
+
+        .register-btn a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .contact-form {
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid #333;
+        }
+
+        .contact-form h3 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: white;
+            font-weight: 700;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            background: #333;
+            border: 1px solid #555;
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            width: 100%;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: #ff4500;
+            box-shadow: 0 0 10px rgba(255, 69, 0, 0.3);
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #ff4500, #ff6b35);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 69, 0, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: #000;
+            padding: 3rem 2rem 1rem;
+            border-top: 1px solid #333;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-icons a {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #ff4500, #ff6b35);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 69, 0, 0.4);
+        }
+
+        .contact-details p {
+            color: #cccccc;
+            margin-bottom: 0.5rem;
+        }
+
+        .copyright {
+            color: #888;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #333;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-row {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header-container">
+            <div class="header-left">
+                <img src="logo/logo.png" alt="Fitness Zone logo" class="logo">
+            </div>
+            <div class="header-right">
+                <button class="payment"><a href="login.php">Payment</a></button>
+                <button class="signup"><a href="login.php">Sign Up</a></button>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="about.php#gym">GYM</a></li>
+                <li><a href="about.php#zumba">Zumba</a></li>
+                <li><a href="about.php#personal-training">Personal Training</a></li>
+                <li><a href="about.php#group-class">Group Class</a></li>
+                <li><a href="about.php#healthy-cafe">Healthy Cafe</a></li>
+                <li><a href="about.php#meal-plan">Meal Plan</a></li>
+                <li><a href="about.php#workout-plan">Workout Plan</a></li>
+                <li><a href="about.php#cardio">Cardio</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>Transform Your Body</h1>
+            <p>Join the ultimate fitness experience with expert trainers, cutting-edge equipment, and a supportive community that will help you achieve your goals.</p>
+            <button class="cta-button">
+                <a href="appointment.php">Book Your Session</a>
+            </button>
+        </div>
+    </section>
+
+    <section class="classes-section">
+        <h2>Our Classes & Training</h2>
+        <div class="classes-grid">
+            <div class="class-card">
+                <div class="class-icon">🧘</div>
+                <h3>Yoga</h3>
+                <p>Relax and strengthen your body with our professional yoga sessions designed for all skill levels.</p>
+            </div>
+            <div class="class-card" style="background-image: url('https://images.unsplash.com/photo-1518611012118-696072aa579a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');">
+                <div class="class-icon">💃</div>
+                <h3>Zumba</h3>
+                <p>Dance your way to fitness with high-energy Zumba sessions that make working out feel like a party.</p>
+            </div>
+            <div class="class-card" style="background-image: url('https://images.unsplash.com/photo-1571019613914-85f342c6a11e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');">
+                <div class="class-icon">🏋</div>
+                <h3>Personal Training</h3>
+                <p>Get one-on-one guidance from our expert trainers with personalized workout plans.</p>
+            </div>
+            <div class="class-card" style="background-image: url('https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');">
+                <div class="class-icon">👥</div>
+                <h3>Group Sessions</h3>
+                <p>Achieve your goals in a motivating group environment with like-minded fitness enthusiasts.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="why-choose-section">
+        <h2>Why Choose Fitness Zone?</h2>
+        <p>
+            At Fitness Zone, we focus on your complete fitness journey with personalized guidance,
+            cutting-edge equipment, and a supportive community. Transform your body 
+            and mind with our expert coaches and specialized programs tailored to your goals.
+        </p>
+        <button class="explore-btn">
+            <a href="about.php">Explore More</a>
+        </button>
+    </section>
+
+    <section class="coaches-section">
+        <h2>Meet Our Expert Coaches</h2>
+      <div class="coaches-grid">
+    <div class="coach-card">
+        <div class="coach-avatar">
+            <img src="image/coach1.jpg" alt="John Smith">
+        </div>
+        <h3>John Smith</h3>
+        <p>Strength & Conditioning Specialist</p>
+    </div>
+    <div class="coach-card">
+        <div class="coach-avatar">
+            <img src="image/coach2.jpg" alt="Sarah Lee">
+        </div>
+        <h3>Sarah Lee</h3>
+        <p>Certified Yoga Instructor</p>
+    </div>
+    <div class="coach-card">
+        <div class="coach-avatar">
+            <img src="image/coach3.jpg" alt="Mike Johnson">
+        </div>
+        <h3>Mike Johnson</h3>
+        <p>Personal Training Expert</p>
+    </div>
+    <div class="coach-card">
+        <div class="coach-avatar">
+            <img src="image/coach4.jpg" alt="Luke Davis">
+        </div>
+        <h3>Luke Davis</h3>
+        <p>HIIT Trainer</p>
+    </div>
+</div>
+
+        <div style="text-align: center;">
+            <button class="explore-btn">
+                <a href="coaches.php">Meet All Coaches</a>
+            </button>
+        </div>
+    </section>
+
+    <section class="benefits-section">
+        <h2>Benefits of Regular Exercise</h2>
+        <p>
+            Exercise is defined as any physical activity that makes your muscles work and requires your body to burn calories. 
+            Maintaining an active lifestyle offers a multitude of health benefits, positively impacting your physical and 
+            mental well-being. In fact, it has the potential to extend your lifespan.
+        </p>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon">💪</div>
+                <h3>Improved Physical Health</h3>
+                <p>
+                    Regular exercise leads to enhanced cardiovascular health, stronger muscles and bones, 
+                    improved flexibility, and increased endurance. It also reduces the risk of chronic diseases 
+                    such as heart disease, diabetes, and certain types of cancer.
+                </p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">😊</div>
+                <h3>Enhanced Mental Health</h3>
+                <p>
+                    Exercise releases endorphins, often referred to as the 'feel-good' hormones, which elevate 
+                    mood and reduce feelings of stress, anxiety, and depression. It also improves sleep quality 
+                    and helps manage conditions such as insomnia.
+                </p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">⚡</div>
+                <h3>Increased Energy Levels</h3>
+                <p>
+                    Regular physical activity improves blood circulation and oxygen delivery to the body, resulting 
+                    in increased energy levels and reduced fatigue throughout your daily activities.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="bmi-section">
+        <div class="bmi-container">
+            <div class="bmi-info">
+                <h2>Calculate Your BMI</h2>
+                <p>
+                    Body Mass Index (BMI) is a measure of body fat based on height and weight. 
+                    It's a useful screening tool to identify whether you're underweight, normal weight, 
+                    overweight, or obese.
+                </p>
+                <p>
+                    Use our BMI calculator to get your current BMI and discover what fitness programs 
+                    would be best suited for your health goals.
+                </p>
+                <div class="fitness-images">
+                    <div class="fitness-image"></div>
+                    <div class="fitness-image"></div>
+                </div>
+            </div>
+            <div class="bmi-calculator">
+                <h3>BMI Calculator</h3>
+                <div class="bmi-form">
+                    <div class="bmi-input-group">
+                        <label for="height">Height (cm)</label>
+                        <input type="number" id="height" placeholder="Enter your height in cm" min="1" max="300">
+                    </div>
+                    <div class="bmi-input-group">
+                        <label for="weight">Weight (kg)</label>
+                        <input type="number" id="weight" placeholder="Enter your weight in kg" min="1" max="500">
+                    </div>
+                    <button class="bmi-calculate-btn" onclick="calculateBMI()">Calculate BMI</button>
+                </div>
+                <div class="bmi-result" id="bmi-result" style="display: none;">
+                    <div class="bmi-value" id="bmi-value">0.0</div>
+                    <div class="bmi-category" id="bmi-category">Enter your details</div>
+                    <div class="bmi-description" id="bmi-description">Please enter your height and weight to calculate your BMI.</div>
+                </div>
+                <div class="bmi-chart">
+                    <h4>BMI Categories</h4>
+                    <div class="bmi-ranges">
+                        <div class="bmi-range" data-category="underweight">
+                            <span>Underweight</span>
+                            <span>< 18.5</span>
+                        </div>
+                        <div class="bmi-range" data-category="normal">
+                            <span>Normal Weight</span>
+                            <span>18.5 - 24.9</span>
+                        </div>
+                        <div class="bmi-range" data-category="overweight">
+                            <span>Overweight</span>
+                            <span>25.0 - 29.9</span>
+                        </div>
+                        <div class="bmi-range" data-category="obese">
+                            <span>Obese</span>
+                            <span>≥ 30.0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section">
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h3>Get in Touch</h3>
+                <p><strong>Fitness Zone</strong></p>
+                <p>Head Office</p>
+                <p>📍 123 Fitness Lane, Kurunegala</p>
+                <p>📞 0112 626 100</p>
+                <p>✉ contact@fitnesszone.com</p>
+                <button class="register-btn">
+                    <a href="register.php">Register Now</a>
+                </button>
+            </div>
+            <form class="contact-form">
+                <h3>Questions? Contact Us</h3>
+                <div class="form-row">
+                    <input type="text" name="first_name" placeholder="First Name" required>
+                    <input type="text" name="last_name" placeholder="Last Name" required>
+                </div>
+                <div class="form-row">
+                    <input type="email" name="email" placeholder="Email *" required>
+                    <input type="text" name="subject" placeholder="Subject">
+                </div>
+                <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="social-icons">
+                <a href="https://www.instagram.com" target="_blank" title="Instagram">📷</a>
+                <a href="https://www.facebook.com" target="_blank" title="Facebook">📘</a>
+                <a href="https://www.whatsapp.com" target="_blank" title="WhatsApp">📱</a>
+            </div>
+            
+            <div class="contact-details">
+                <p>📍 123 Fitness Lane, Kurunegala</p>
+                <p>📞 +94 76 001 0844 | ✉ contact@fitnesszone.com</p>
+            </div>
+
+            <div class="copyright">
+                &copy; 2024 Fitness Zone Gym. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // BMI Calculator Functions
+        function calculateBMI() {
+            const height = parseFloat(document.getElementById('height').value);
+            const weight = parseFloat(document.getElementById('weight').value);
+            
+            if (!height || !weight || height <= 0 || weight <= 0) {
+                alert('Please enter valid height and weight values.');
+                return;
+            }
+            
+            const heightInMeters = height / 100;
+            const bmi = weight / (heightInMeters * heightInMeters);
+            
+            displayBMIResult(bmi);
+        }
+        
+        function displayBMIResult(bmi) {
+            const resultDiv = document.getElementById('bmi-result');
+            const valueDiv = document.getElementById('bmi-value');
+            const categoryDiv = document.getElementById('bmi-category');
+            const descriptionDiv = document.getElementById('bmi-description');
+            
+            let category, description, categoryKey;
+            
+            if (bmi < 18.5) {
+                category = 'Underweight';
+                categoryKey = 'underweight';
+                description = 'You may need to gain weight. Consider consulting with a nutritionist and trainer for a healthy weight gain plan.';
+            } else if (bmi >= 18.5 && bmi < 25) {
+                category = 'Normal Weight';
+                categoryKey = 'normal';
+                description = 'Great! You have a healthy weight. Maintain it with regular exercise and a balanced diet.';
+            } else if (bmi >= 25 && bmi < 30) {
+                category = 'Overweight';
+                categoryKey = 'overweight';
+                description = 'You may benefit from weight loss. Our fitness programs can help you achieve a healthy weight.';
+            } else {
+                category = 'Obese';
+                categoryKey = 'obese';
+                description = 'Consider consulting with healthcare professionals. Our specialized programs can support your weight loss journey.';
+            }
+            
+            valueDiv.textContent = bmi.toFixed(1);
+            categoryDiv.textContent = category;
+            descriptionDiv.textContent = description;
+            
+            // Highlight the corresponding BMI range
+            document.querySelectorAll('.bmi-range').forEach(range => {
+                range.classList.remove('active');
+                if (range.dataset.category === categoryKey) {
+                    range.classList.add('active');
+                }
+            });
+            
+            resultDiv.style.display = 'flex';
+            
+            // Smooth scroll to result
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Header background change on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(0, 0, 0, 0.98)';
+            } else {
+                header.style.background = 'rgba(0, 0, 0, 0.95)';
+            }
+        });
+
+        // Animate cards on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards
+        document.querySelectorAll('.class-card, .coach-card, .benefit-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
