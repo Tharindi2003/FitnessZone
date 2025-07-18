@@ -1,0 +1,9 @@
+// The users or customers can register their self and login
+
+	Existing Login -username - M00001
+			Password - 2004
+
+// But staff cannot be created
+
+	Existing staff -username - ADMIN
+			Password - ADMIN
